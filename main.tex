@@ -107,44 +107,63 @@
 % ----------------------------------
 % Abstract
 % ----------------------------------
-  \begin{block}{Abstract}
-
+  \begin{block}{Introduction}
+    La fibrillation atriale (FA) est l'arythmie cardiaque la plus fréquente. 
+    Elle se caractérise par des épisodes de rythme cardiaque \textbf{rapide et irrégulier}.
+    L'irrégularité des battements du c{\oe}ur entraîne une perte d'efficacité du débit sanguin et une augmentation du risque de formations d'emboles.
+    Ainsi \textbf{la FA multiplie par 5 le risque d'AVC} et est à l'origine de 25\% des AVC ischémiques.
+    Diagnostiquer la FA au plus tôt permet une réduction du risque de l'AVC. 
+    L'électrocardiogramme (ECG) permet de mesurer l'activité électrique du c{\oe}ur et de diagnostiquer la FA, à condition de mesurer cette activité durant un épisode.
+    % La FA se détecte notamment grâce à des intervalles R-R, ou la durée entre deux battements de c{\oe}ur consécutifs, très irréguliers.
+    On cherche notamment à observer les intervalles RR, ou la durée entre deux battements de c{\oe}ur consécutifs, sur le signal ECG.
+    Ce travail porte sur la \textbf{prédiction d'un nouvel épisode de FA, plusieurs heures avant sa survenue, à partir de l'évolution du signal ECG}.
   \end{block}
   
 % ----------------------------------
-% Section: Literature review
+% Section: Research Objectifs
 % ----------------------------------
-  \begin{block}{Literature review}
 
-    \heading{Research gaps}
-
-
-  \end{block}
-
-% ----------------------------------
-% Section: Research objectives
-% ----------------------------------
-  \begin{alertblock}{Research objectives}
-
-    The present study investigates the following objectives:
-
-    \begin{itemize}
-      \item \textbf{Objective 1:} Pellentesque eget convallis lorem, vel vestibulum nisl.
-      
-      \item \textbf{Objective 2:} Curabitur eleifend velit sagittis turpis vehicula auctor.
-    \end{itemize}
-
-  \end{alertblock}
+\begin{alertblock}{Objectifs}
+  \begin{itemize}
+    \item \textbf{Objectif 1 :} Modéliser l'évolution du signal ECG avant la survenue de la FA (modèle longitudinal)
+    \item \textbf{Objectif 2 :} Modéliser la prédiction de la survenue de la FA comme un problème d'estimation de temps d'évènement (modèle de survie)
+    \item \textbf{Objectif 3 :} Intégrer l'évolution longitudinale du signal ECG comme une covariable dépendante du temps dans le modèle de survie (modèle conjoint)
+  \end{itemize} 
+\end{alertblock}
 
 % ----------------------------------
 % Section: Study methodology
 % ----------------------------------
- \begin{block}{Study methodology}
-    The present study adopted the following step-by-step methodology to achieve the research objectives.
- 
-    % \input{images/figure1}
+ \begin{block}{Méthode}
+    \heading{Données}
+      Nous avons utilisé la base de données IRIDIA-AF qui contient des enregistrements ECG de plus de 24h de patients avec des épisodes de FA.
+      Nous avons inclus 137 enregistrements incluant ceux avec un rythme normal, ou rythme sinusal (RS), d'au moins 1 heure avant le premier épisode de FA.
+    
+    \heading{Sample Entropy}
+      Pour caractériser l'évolution du signal, nous avons calculé un biomarqueur longitudinal, le sample entropy (SampEn) sur la série des intervalles RR.
+      Il s'agit d'une mesure quantitative de la complexité d'un signal, plus celui-ci augmente plus la serie est imprévisible et complexe.
+      On a calculé une valeur de SampEn pour chaque segment de 5 min de signal.
 
- \end{block}
+    \heading{Modélisation longitudinale}
+      On modélise l'évolution du SampEn à travers un modèle linéaire à effets mixtes (LMM) plus ou moins flexible pour capter l'évolution du SampEn au cours du temps.
+    
+    \heading{Modélisation conjointe}
+      Le modèle conjoint nous donne la formulation du risque instantanée $h_{i}(t)$ suivante :
+      \begin{equation}
+        h_{i}(t | M_{i}(t), w_{i}) = h_{0}\exp{\{\gamma^{T}w_{i} + \alpha \textcolor{red}{m_{i}(t)}\}}, t > 0
+      \end{equation}
+
+      \begin{itemize}
+        \item $M_{i}(t) = \{m_{i}(s), 0 \leq s < t\}$, l'historique du biomarqueur longitudinal jsuqu'au temps $t$.
+        \item $w_{i}$ vecteur des covariables à baseline et $\gamma$ son vecteur de coefficients associé.
+        \item $\alpha$ le coefficient associé à la covariable dépendante du temps $m_{i}(t)$
+        \item $m_{i}(t)$ la valeur du modèle LMM retenu au temps $t$ pour le patient $i$
+      \end{itemize}
+      Le modèle conjoint pose que le risque instantané au temps $t$, $h_{i}(t)$, dépend de la valeur du biomarqueur au temps $t$, $m_{i}(t)$,
+      et d'éventuelles covariables à baseline $w_i$.
+      Le modèle estime les coefficients $\gamma$ et $\alpha$ qui quantifient l'association entre le risque et les covariables.
+  \end{block}
+
 
 % -------------------------------
 % Section: Site selection and data collection
