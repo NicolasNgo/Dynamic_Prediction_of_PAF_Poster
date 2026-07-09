@@ -30,6 +30,7 @@
 \usepackage{xcolor}
 \usepackage[skip=2pt,font=normalsize]{subcaption}
 \usepackage{adjustbox}
+\usepackage{mathrsfs}
 
 % ----------------------------------
 % For plotting study methodology
@@ -62,6 +63,11 @@
 \setlength{\colwidth}{0.45\paperwidth}
 
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
+
+\definecolor{bloc1}{RGB}{21, 96, 130}
+\definecolor{bloc2}{RGB}{233, 113, 50}
+\definecolor{bloc3}{RGB}{25, 107, 36}
+\definecolor{bloc4}{RGB}{15, 158, 213}
 
 % ====================
 % Title
@@ -150,44 +156,45 @@
     \heading{Modélisation conjointe}
       Le modèle conjoint nous donne la formulation du risque instantanée $h_{i}(t)$ suivante :
       \begin{equation}
-        h_{i}(t | M_{i}(t), w_{i}) = h_{0}\exp{\{\gamma^{T}w_{i} + \alpha \textcolor{red}{m_{i}(t)}\}}, t > 0
+        h_{i}(t | \mathcal{M}_{i}(t), w_{i}) = h_{0}(t)\exp{\{\gamma^{T}w_{i} + \alpha \textcolor{red}{m_{i}(t)}\}}, t > 0
       \end{equation}
 
       \begin{itemize}
-        \item $M_{i}(t) = \{m_{i}(s), 0 \leq s < t\}$, l'historique du biomarqueur longitudinal jsuqu'au temps $t$.
+        \item $\mathcal{M}_{i}(t) = \{m_{i}(s), 0 \leq s < t\}$, l'historique du biomarqueur longitudinal jusqu'au temps $t$.
         \item $w_{i}$ vecteur des covariables à baseline et $\gamma$ son vecteur de coefficients associé.
-        \item $\alpha$ le coefficient associé à la covariable dépendante du temps $m_{i}(t)$
-        \item $m_{i}(t)$ la valeur du modèle LMM retenu au temps $t$ pour le patient $i$
+        \item $\alpha$ le coefficient associé à la covariable dépendante du temps $m_{i}(t)$.
+        \item $m_{i}(t)$ la valeur du modèle LMM retenu au temps $t$ pour le patient $i$.
       \end{itemize}
       Le modèle conjoint pose que le risque instantané au temps $t$, $h_{i}(t)$, dépend de la valeur du biomarqueur au temps $t$, $m_{i}(t)$,
       et d'éventuelles covariables à baseline $w_i$.
       Le modèle estime les coefficients $\gamma$ et $\alpha$ qui quantifient l'association entre le risque et les covariables.
-  \end{block}
 
-
-% -------------------------------
-% Section: Site selection and data collection
-% -------------------------------
-\begin{block}{Site selection and data collection}
-    Sed et augue accumsan nibh ullamcorper accumsan. Nam dictum urna tortor, ut pretium leo eleifend efficitur. Mauris pretium, elit non posuere rhoncus, tortor enim dapibus lacus, a vehicula orci diam sit amet urna. In hac habitasse platea dictumst. Cras ut fermentum nunc, id interdum ex. Donec tincidunt metus nulla, a interdum ante efficitur cursus.  
-
-    Sed et augue accumsan nibh ullamcorper accumsan. Nam dictum urna tortor, ut pretium leo eleifend efficitur. Mauris pretium, elit non posuere rhoncus, tortor enim dapibus lacus, a vehicula orci diam sit amet urna. In hac habitasse platea dictumst. Cras ut fermentum nunc, id interdum ex. Donec tincidunt metus nulla, a interdum ante efficitur cursus.
-    
-\end{block}
-
-% -------------------------------
-% Section: Descriptive Statistics
-% -------------------------------
-
-\begin{block}{Descriptive statistics}
+    \heading{Structures des modèles}
+    En pratique, nous avons testé plusieurs configurations de modèles conjoints, variant principalement selon le modèle longitudinal utilisé
+    pour représenter l'évolution du SampEn.
     \begin{itemize}
-        \item Sed et augue accumsan nibh 45\% ullamcorper accumsan.
-        \item Sed et augue accumsan nibh ullamcorper accumsan. Nam dictum urna tortor, ut pretium leo eleifend efficitur. 
-        \item Nullam at velit facilisis nibh vulputate porta a sit amet metus.
-        \item Maecenas eget nunc suscipit, luctus nisl non, tristique felis.
-        \item Maecenas tellus diam, placerat sit amet nisl at, dapibus imperdiet arcu.
-    \end{itemize} 
-\end{block}
+      \item[\textcolor{bloc1}{\raise0.5ex \hbox{\vrule width 0.5ex height 0.5ex}}] \textcolor{bloc1}{Bloc 1} : Modèles avec des polynômes d'ordre croissant.
+      \item[\textcolor{bloc2}{\raise0.5ex \hbox{\vrule width 0.5ex height 0.5ex}}] \textcolor{bloc2}{Bloc 2} : Modèles avec des splines cubiques naturels.
+      \item[\textcolor{bloc3}{\raise0.5ex \hbox{\vrule width 0.5ex height 0.5ex}}] \textcolor{bloc3}{Bloc 3} : Modèles avec une hypothèse de distribution Gamma des valeurs de SampEn.
+      \item[\textcolor{bloc4}{\raise0.5ex \hbox{\vrule width 0.5ex height 0.5ex}}] \textcolor{bloc4}{Bloc 4} : Modèles avec une transformation du SampEn.
+    \end{itemize}
+
+    \heading{Prédiction dynamique}
+      Pour un patient $l$, on estime la probabilité conditionnelle $\pi_l(t, u)$ de ne pas avoir d'épisode de FA jusqu'au temps $u$, sachant que le patient n'a pas eu
+      d'évènement jusqu'au temps $t<u$.
+      Avec un certain seuil $c \in [0,1]$, on prédit pour le patient $l$ :
+      \begin{itemize}
+        \item $\pi_{l}(t, u) \leq c$ le patient aura un nouvel épisode de FA entre $t$ et $u$.
+        \item $\pi_{l}(t, u) > c$ le patient n'aura pas de FA entre $t$ et $u$.
+      \end{itemize}
+
+      On définit alors la sensibilité comme la probabilité que $\pi_{l}(t, u) \leq c$ sachant que le patient $l$ a fait l'évènement entre $t$ et $u$.
+      La spécificité comme la probabilité que $\pi_{l}(t, u) > c$ sachant que le patient a fait l'évènement après $u$. On répète l'opération $\forall c \in [0, 1]$ pour construire une courbe ROC et un AUC.
+
+    \heading{Validation interne}
+      Nous avons utilisé la procédure bootstrap pour évaluer la performance des différentes modélisations conjointes.
+      À chaque réplication bootstrap, on calcule la sensibilité, la spécificité et l'AUC pour $t = 12h$ et $u = 24h$.
+  \end{block}
 
 \end{column}
 
@@ -196,74 +203,52 @@
 \begin{column}{\colwidth}
 
 % -------------------------------
-% Section: Results and discussion
+% Section: Resultats
 % -------------------------------
 
-\begin{block}{Results and discussion}
-    \heading{Model estimates}
-    Pellentesque eget convallis lorem, vel vestibulum nisl. Vivamus suscipit augue at ipsum commodo semper. Duis hendrerit, metus non scelerisque ultricies, libero dolor malesuada diam, fermentum scelerisque augue justo a erat.
+\begin{block}{Résultats}
+    \heading{{\'E}valuation des performances de prédiction (classification)}
 
-    % \input{images/figure2}
-
-    Cras ut fermentum nunc, id interdum ex. Donec tincidunt metus nulla, a interdum ante efficitur cursus. Proin justo mauris, imperdiet vel efficitur ac, lobortis et neque. Etiam ac iaculis libero.
-
-    % \input{tables/table1}
-
+    \begin{figure}
+        \label{Fig1}
+        \includegraphics[width = 1 \textwidth]{Image2.png}
+        \caption{Performances des modèles entre $t=12h$ et $u=24h$ selon la structure des modèles conjoints.
+        Les cercles rouges représentent arbitrairement les modèles ayant eu des performances similaires.}
+    \end{figure}
 \end{block}
+
+Les résultats se déclinent en quatre groupes :
+\begin{enumerate}
+  \item Forte spécificité, jusqu'à 77,94\%, mais faible sensibilité. Bonne détection des patients peu à risque de faire de la FA.
+  \item Spécificité et sensibilité équilibrées, avec une sensibilité un peu meilleure, jusqu'à 67,34\%.
+  \item Forte sensibilité, jusqu'à 77,63\%, mais faible spécificité. Bonne détection des patients à risque de faire de la FA.
+  \item Faibles spécificité et sensibilité. 
+\end{enumerate}
+
+\heading{Prédiction individualisée de la survie}
+
+Avec les modèles conjoints, on peut également mettre à jour la probabilité $\pi_{l}(t, u)$ au fur et à mesure que l'on obtient de nouvelles mesures.
+
+\begin{figure}
+  \includegraphics[width = 0.75 \textwidth]{Image3.png}
+  \caption{Prédiction individualisée de la probabilité conditionnelle de ne pas avoir de FA, mise-à-jour dynamiquement à $t = 1, 3, 6 et 12h$ et $u=24h$ pour un patient ayant un épisode de FA à $T^*=21h$. Le modèle utilisé correspond au modèle ayant obtenu une sensibilité de 77,63\% et une spécificité de 40,62\% dans Figure \ref{Fig1}.}
+\end{figure}
+
+\end{column}
+\separatorcolumn
+\end{columns}
+
 
 % -------------------------------
 % Section: Conclusions
 % -------------------------------
-   \begin{block}{Conclusions}
-    \begin{itemize}
-      \item Sed et augue accumsan nibh ullamcorper accumsanam dictum urna tortor, ut pretium leo eleifend.  
-      \item Donec suscipit, urna quis tempus consectetur, quam est placerat ante, et scelerisque metus velit. 
-      \item Nam dictum urna tortor, ut pretium leo eleifend efficitur.
-      \item Praesent blandit faucibus quam, et tincidunt mauris sagittis eget 2.2\%.
-      \item Dolor sit amet, consectetur adipiscing elit. Mauris in nulla ultricies suscipit.
-    \end{itemize}
-  \end{block}
+\begin{block}{Conclusion}
+  \begin{itemize}
+    \item
+  \end{itemize}
+\end{block}
 
-
-% -------------------------------
-% Section: What is already known about this subject?
-% -------------------------------
-  \begin{exampleblock}{What is already known about this subject?}
-
-    \begin{itemize}
-      \item \textbf{Lorem ipsum dolor sit amet}, consectetur adipiscing elit. Mauris in nulla ac leo ultricies suscipit.
-      \item The \textbf{Duis vestibulum augue} in leo placerat, sit amet pharetra mi elementum.
-      \item \textbf{Fusce sit amet} velit pulvinar, feugiat velit sit amet, tristique dolor.
-    \end{itemize}
-
-  \end{exampleblock}
-
-  
-% -------------------------------
-% Section: What does this study add?
-% -------------------------------
-  \begin{exampleblock}{What does this study add?}
-    \begin{itemize}
-      \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in nulla ac leo ultricies suscipit.
-      \item The Duis vestibulum augue in leo placerat, sit amet pharetra mi elementum.
-      \item Fusce sit amet velit pulvinar, feugiat velit sit amet, tristique dolor.
-    \end{itemize}
-
-  \end{exampleblock}
-
-
-% -------------------------------
-% Section: Practical Implications
-% -------------------------------
-  \begin{exampleblock}{Practical implications}
-    \begin{itemize}
-      \item Ipsum dolor sit amet, consectetur adipiscing elit. Mauris in nulla ultricies suscipit.
-      \item Duis augue in leo placerat, sit amet pharetra mi elementum.
-      \item Sit amet pulvinar, feugiat velit sit amet, tristique dolor.
-    \end{itemize}
-
-  \end{exampleblock}
-
+ 
 % -------------------------------
 % Section: References
 % ------------------------------- 
@@ -274,22 +259,6 @@
     \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
 
   \end{block}
-
-% -------------------------------
-% Section: Portfolio
-% -------------------------------
-  \begin{block}{Author$^{1}$ Portfolio Website}
-    
-    % \input{images/figure3}
-
-  \end{block}
-
-\end{column}
-\separatorcolumn
-
-
-
-\end{columns}
 \end{frame}
 
 \end{document}
