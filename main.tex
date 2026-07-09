@@ -231,7 +231,7 @@ Avec les modèles conjoints, on peut également mettre à jour la probabilité $
 
 \begin{figure}
   \includegraphics[width = 0.75 \textwidth]{Image3.png}
-  \caption{Prédiction individualisée de la probabilité conditionnelle de ne pas avoir de FA, mise-à-jour dynamiquement à $t = 1, 3, 6 et 12h$ et $u=24h$ pour un patient ayant un épisode de FA à $T^*=21h$. Le modèle utilisé correspond au modèle ayant obtenu une sensibilité de 77,63\% et une spécificité de 40,62\% dans Figure \ref{Fig1}.}
+  \caption{Prédiction individualisée de la probabilité conditionnelle de ne pas avoir de FA, mise-à-jour dynamiquement à $t = 1, 3, 6$ et $12h$ et $u=24h$ pour un patient ayant un épisode de FA à $T^*=21h$. Le modèle utilisé correspond au modèle ayant obtenu une sensibilité de 77,63\% et une spécificité de 40,62\% dans Figure \ref{Fig1}.}
 \end{figure}
 
 \end{column}
@@ -242,11 +242,15 @@ Avec les modèles conjoints, on peut également mettre à jour la probabilité $
 % -------------------------------
 % Section: Conclusions
 % -------------------------------
-\begin{block}{Conclusion}
+\begin{alertblock}{Conclusion}
+
+  Dans ces travaux nous avons :
   \begin{itemize}
-    \item
+    \item Utiliser le SampEn comme biomarqueur longitudinal pour caractériser le rythme cardiaque.
+    \item Utiliser la modélisation conjointe pour estimer le risque de survenue d'un épisode de FA dans les douze prochaines heures.
+    \item Obtenus un modèle permettant d'obtenir une \textbf{sensibilité à 77,63\%} et un autre modèle avec une \textbf{spécificité à 77,94\%}.
   \end{itemize}
-\end{block}
+\end{alertblock}
 
  
 % -------------------------------
