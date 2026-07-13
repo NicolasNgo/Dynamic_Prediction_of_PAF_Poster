@@ -196,6 +196,16 @@
       À chaque réplication bootstrap, on calcule la sensibilité, la spécificité et l'AUC pour $t = 12h$ et $u = 24h$.
   \end{block}
 
+  % -------------------------------
+  % Section: Conclusions
+  % -------------------------------
+  \begin{alertblock}{Conclusion}
+    \begin{itemize}
+      \item Les modèles conjoints permettent une prédiction personnalisée du risque de FA.
+      \item Le choix du modèle longitudinal influence les performances en prédiction.
+      \item Les modèles plus flexibles permettent une meilleure détection des patients à risque.
+    \end{itemize}
+  \end{alertblock}
 \end{column}
 
 \separatorcolumn
@@ -215,7 +225,7 @@
         \caption{Performances des modèles entre $t=12h$ et $u=24h$ selon la structure des modèles conjoints.
         Les cercles rouges représentent arbitrairement les modèles ayant eu des performances similaires.}
     \end{figure}
-\end{block}
+
 
 Les résultats se déclinent en quatre groupes :
 \begin{enumerate}
@@ -237,24 +247,18 @@ Avec les modèles conjoints, on peut également mettre à jour la probabilité $
 
 La Figure \ref{Fig2} montre que le modèle conjoint reproduit correctement l'évolution du SampEn et actualise la prédiction du risque à chaque nouvelle mesure.
 Malgré les nouvelles mesures, la probabilité de survie à 24h reste faible, ce qui est cohérent avec la survenue effective d'un épisode de FA à 23h pour ce patient.
+\end{block}
+
+\begin{exampleblock}{}
+  \begin{figure}
+    \includegraphics[width = 0.25 \textwidth]{qrcode_link.png}
+  \end{figure}
+\end{exampleblock}
 
 \end{column}
 \separatorcolumn
 \end{columns}
 
-
-% -------------------------------
-% Section: Conclusions
-% -------------------------------
-\begin{alertblock}{Conclusion}
-  \begin{itemize}
-    \item Les modèles conjoints permettent une prédiction personnalisée du risque de FA.
-    \item Le choix du modèle longitudinal influence les performances en prédiction.
-    \item Les modèles plus flexibles permettent une meilleure détection des patients à risque.
-  \end{itemize}
-\end{alertblock}
-
- 
 % -------------------------------
 % Section: References
 % ------------------------------- 
@@ -266,5 +270,6 @@ Malgré les nouvelles mesures, la probabilité de survie à 24h reste faible, ce
 
   \end{block}
 \end{frame}
+
 
 \end{document}
