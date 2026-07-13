@@ -142,11 +142,10 @@
 % ----------------------------------
  \begin{block}{Méthode}
     \heading{Données}
-      Nous avons utilisé la base de données IRIDIA-AF qui contient des enregistrements ECG de plus de 24h de patients avec des épisodes de FA.
-      Nous avons inclus 137 enregistrements incluant ceux avec un rythme normal, ou rythme sinusal (RS), d'au moins 1 heure avant le premier épisode de FA.
+      137 enregistrements ECG (>24h) issus de la base \textbf{IRIDIA-AF} \cite{gilon2023iridia}, incluant \textbf{au moins 1 heure} de rythme sinusal, ou rythme normal, avant le premier épisode de FA.
     
     \heading{Sample Entropy}
-      Pour caractériser l'évolution du signal, nous avons calculé un biomarqueur longitudinal, le sample entropy (SampEn) sur la série des intervalles RR.
+      Pour caractériser l'évolution du signal, nous avons calculé un biomarqueur longitudinal, le sample entropy (SampEn) \cite{richman2000physiological} sur la série des intervalles RR.
       Il s'agit d'une mesure quantitative de la complexité d'un signal, plus celui-ci augmente plus la serie est imprévisible et complexe.
       On a calculé une valeur de SampEn pour chaque segment de 5 min de signal.
 
@@ -154,7 +153,7 @@
       On modélise l'évolution du SampEn à travers un modèle linéaire à effets mixtes (LMM) plus ou moins flexible pour capter l'évolution du SampEn au cours du temps.
     
     \heading{Modélisation conjointe}
-      Le modèle conjoint nous donne la formulation du risque instantanée $h_{i}(t)$ suivante :
+      Le modèle conjoint \cite{rizopoulos2012joint} nous donne la formulation du risque instantanée $h_{i}(t)$ suivante :
       \begin{equation}
         h_{i}(t | \mathcal{M}_{i}(t), w_{i}) = h_{0}(t)\exp{\{\gamma^{T}w_{i} + \alpha \textcolor{red}{m_{i}(t)}\}}, t > 0
       \end{equation}
@@ -180,8 +179,7 @@
     \end{itemize}
 
     \heading{Prédiction dynamique}
-      Pour un patient $l$, on estime la probabilité conditionnelle $\pi_l(t, u)$ de ne pas avoir d'épisode de FA jusqu'au temps $u$, sachant que le patient n'a pas eu
-      d'évènement jusqu'au temps $t<u$.
+      Pour un patient $l$, on estime la probabilité conditionnelle $\pi_l(t, u)$ \cite{andrinopoulou2021reflection} de ne pas avoir d'épisode de FA jusqu'au temps $u$ , sachant que le patient n'a pas eu d'évènement jusqu'au temps $t<u$.
       Avec un certain seuil $c \in [0,1]$, on prédit pour le patient $l$ :
       \begin{itemize}
         \item $\pi_{l}(t, u) \leq c$ le patient aura un nouvel épisode de FA entre $t$ et $u$.
@@ -196,16 +194,7 @@
       À chaque réplication bootstrap, on calcule la sensibilité, la spécificité et l'AUC pour $t = 12h$ et $u = 24h$.
   \end{block}
 
-  % -------------------------------
-  % Section: Conclusions
-  % -------------------------------
-  \begin{alertblock}{Conclusion}
-    \begin{itemize}
-      \item Les modèles conjoints permettent une prédiction personnalisée du risque de FA.
-      \item Le choix du modèle longitudinal influence les performances en prédiction.
-      \item Les modèles plus flexibles permettent une meilleure détection des patients à risque.
-    \end{itemize}
-  \end{alertblock}
+
 \end{column}
 
 \separatorcolumn
@@ -249,26 +238,57 @@ La Figure \ref{Fig2} montre que le modèle conjoint reproduit correctement l'év
 Malgré les nouvelles mesures, la probabilité de survie à 24h reste faible, ce qui est cohérent avec la survenue effective d'un épisode de FA à 23h pour ce patient.
 \end{block}
 
-\begin{exampleblock}{}
-  \begin{figure}
-    \includegraphics[width = 0.25 \textwidth]{qrcode_link.png}
-  \end{figure}
-\end{exampleblock}
+\begin{alertblock}{Conclusion}
+    \begin{itemize}
+      \item Les modèles conjoints permettent une prédiction personnalisée du risque de FA.
+      \item Le choix du modèle longitudinal influence les performances en prédiction.
+      \item Les modèles plus flexibles permettent une meilleure détection des patients à risque.
+    \end{itemize}
+\end{alertblock}
 
 \end{column}
 \separatorcolumn
 \end{columns}
 
-% -------------------------------
-% Section: References
-% ------------------------------- 
+  % -------------------------------
+  % Section: Conclusions
+  % -------------------------------
 
-  \begin{block}{References}
+% \begin{columns}[t]
+%   \begin{column}{1.2\colwidth}
+%     \begin{block}{References}
+%         \nocite{*}
+%         \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
+%     \end{block}
+%   \end{column}
 
-    \nocite{*}
-    \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
+%   \begin{column}{0.8\colwidth}
+    
+%     \begin{exampleblock}{}
+%         \begin{figure}
+%           \includegraphics[width = 0.3 \textwidth]{qrcode_link.png}
+%         \end{figure}
+%     \end{exampleblock}
 
-  \end{block}
+%   \end{column}
+% \end{columns}
+
+\begin{block}{Références}
+  \begin{columns}[t]
+    \begin{column}{1.6 \colwidth}
+      \nocite{*}
+      \footnotesize{\bibliographystyle{ieeetr}\bibliography{poster}}
+    \end{column}
+
+    \begin{column}{0.5\colwidth}
+      \begin{figure}
+        \includegraphics[width = 0.4 \textwidth]{qrcode_link.png}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{block}
+
+
 \end{frame}
 
 
