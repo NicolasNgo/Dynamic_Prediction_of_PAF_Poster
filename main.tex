@@ -117,7 +117,7 @@
     La fibrillation atriale (FA) est l'arythmie cardiaque la plus fréquente. 
     Elle se caractérise par des épisodes de rythme cardiaque \textbf{rapide et irrégulier}.
     L'irrégularité des battements du c{\oe}ur entraîne une perte d'efficacité du débit sanguin et une augmentation du risque de formations d'emboles.
-    Ainsi \textbf{la FA multiplie par 5 le risque d'AVC} et est à l'origine de 25\% des AVC ischémiques.
+    Ainsi \textbf{la FA multiplie par cinq le risque d'AVC} et est à l'origine de 25\% des AVC ischémiques.
     Diagnostiquer la FA au plus tôt permet une réduction du risque de l'AVC. 
     L'électrocardiogramme (ECG) permet de mesurer l'activité électrique du c{\oe}ur et de diagnostiquer la FA, à condition de mesurer cette activité durant un épisode.
     % La FA se détecte notamment grâce à des intervalles R-R, ou la durée entre deux battements de c{\oe}ur consécutifs, très irréguliers.
@@ -131,9 +131,9 @@
 
 \begin{alertblock}{Objectifs}
   \begin{itemize}
-    \item \textbf{Objectif 1 :} Modéliser l'évolution du signal ECG avant la survenue de la FA (modèle longitudinal)
-    \item \textbf{Objectif 2 :} Modéliser la prédiction de la survenue de la FA comme un problème d'estimation de temps d'évènement (modèle de survie)
-    \item \textbf{Objectif 3 :} Intégrer l'évolution longitudinale du signal ECG comme une covariable dépendante du temps dans le modèle de survie (modèle conjoint)
+    \item \textbf{Objectif 1 :} Modéliser l'évolution du signal ECG avant la survenue de la FA (modèle longitudinal).
+    \item \textbf{Objectif 2 :} Modéliser la prédiction de la survenue de la FA comme un problème d'estimation de temps d'évènement (modèle de survie).
+    \item \textbf{Objectif 3 :} Intégrer l'évolution longitudinale du signal ECG comme une covariable dépendante du temps dans le modèle de survie (modèle conjoint).
   \end{itemize} 
 \end{alertblock}
 
@@ -146,7 +146,7 @@
     
     \heading{Sample Entropy}
       Pour caractériser l'évolution du signal, nous avons calculé un biomarqueur longitudinal, le sample entropy (SampEn) \cite{richman2000physiological} sur la série des intervalles RR.
-      Il s'agit d'une mesure quantitative de la complexité d'un signal, plus celui-ci augmente plus la serie est imprévisible et complexe.
+      Il s'agit d'une mesure quantitative de la complexité d'un signal, plus celui-ci augmente plus la série est imprévisible et complexe.
       On a calculé une valeur de SampEn pour chaque segment de 5 min de signal.
 
     \heading{Modélisation longitudinale}
@@ -179,7 +179,7 @@
     \end{itemize}
 
     \heading{Prédiction dynamique}
-      Pour un patient $l$, on estime la probabilité conditionnelle $\pi_l(t, u)$ \cite{andrinopoulou2021reflection} de ne pas avoir d'épisode de FA jusqu'au temps $u$ , sachant que le patient n'a pas eu d'évènement jusqu'au temps $t<u$.
+      Pour un patient $l$, on estime la probabilité conditionnelle $\pi_l(t, u)$ \cite{andrinopoulou2021reflection} de ne pas avoir d'épisode de FA jusqu'au temps $u$, sachant que le patient n'a pas eu d'évènement jusqu'au temps $t<u$.
       Avec un certain seuil $c \in [0,1]$, on prédit pour le patient $l$ :
       \begin{itemize}
         \item $\pi_{l}(t, u) \leq c$ le patient aura un nouvel épisode de FA entre $t$ et $u$.
@@ -241,8 +241,8 @@ Malgré les nouvelles mesures, la probabilité de survie à 24h reste faible, ce
 \begin{alertblock}{Conclusion}
     \begin{itemize}
       \item Les modèles conjoints permettent une prédiction personnalisée du risque de FA.
-      \item Le choix du modèle longitudinal influence les performances en prédiction.
-      \item Les modèles plus flexibles permettent une meilleure détection des patients à risque.
+      \item Le choix du modèle longitudinal influence les performances prédictive.
+      \item Les modèles plus flexibles offrent une meilleure détection des patients à risque.
     \end{itemize}
 \end{alertblock}
 
@@ -250,45 +250,20 @@ Malgré les nouvelles mesures, la probabilité de survie à 24h reste faible, ce
 \separatorcolumn
 \end{columns}
 
-  % -------------------------------
-  % Section: Conclusions
-  % -------------------------------
-
-% \begin{columns}[t]
-%   \begin{column}{1.2\colwidth}
-%     \begin{block}{References}
-%         \nocite{*}
-%         \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
-%     \end{block}
-%   \end{column}
-
-%   \begin{column}{0.8\colwidth}
-    
-%     \begin{exampleblock}{}
-%         \begin{figure}
-%           \includegraphics[width = 0.3 \textwidth]{qrcode_link.png}
-%         \end{figure}
-%     \end{exampleblock}
-
-%   \end{column}
-% \end{columns}
-
 \begin{block}{Références}
   \begin{columns}[t]
-    \begin{column}{1.6 \colwidth}
+    \begin{column}{1.7 \colwidth}
       \nocite{*}
       \footnotesize{\bibliographystyle{ieeetr}\bibliography{poster}}
     \end{column}
 
-    \begin{column}{0.5\colwidth}
+    \begin{column}{0.45\colwidth}
       \begin{figure}
         \includegraphics[width = 0.4 \textwidth]{qrcode_link.png}
       \end{figure}
     \end{column}
   \end{columns}
 \end{block}
-
-
 \end{frame}
 
 

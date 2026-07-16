@@ -30,11 +30,14 @@
 \setbeamerfont{headline}{family=\Raleway}
 \setbeamerfont{headline title}{size=\Huge,series=\bfseries}
 \setbeamerfont{headline author}{size=\Large}
-\setbeamerfont{headline institute}{size=\normalsize}
-\setbeamerfont{block title}{family=\Raleway,size=\large,series=\bfseries}
+\setbeamerfont{headline institute}{size=\small}
+\setbeamerfont{block title}{family=\Raleway,size=\Large,series=\bfseries}
 \setbeamerfont{heading}{family=\Lato,series=\bfseries}
 \setbeamerfont{caption}{size=\small}
-\setbeamerfont{footline}{family=\Raleway,size=\small}
+\setbeamerfont{footline}{family=\Raleway,size=\footnotesize}
+\setbeamerfont{block body alerted}{size=\large}
+% \setbeamerfont{block body}{size = \large}
+
 
 % ====================
 % Macros
@@ -183,7 +186,7 @@
 {
   \end{beamercolorbox}
   \vskip0pt
-  \vspace*{2ex}
+  \vspace*{2.5ex}
 }
 
 % Alert Block
@@ -196,7 +199,7 @@
     \begin{beamercolorbox}[colsep=0.025ex]{block separator alerted}\end{beamercolorbox}
   \end{beamercolorbox}
   {\parskip0pt\par}
-  \usebeamerfont{block body}
+  \usebeamerfont{block body alerted}
   \vskip-0.5ex
   \begin{beamercolorbox}[colsep*=0ex]{block body alerted}
   \justifying
@@ -210,7 +213,7 @@
   \vskip1ex
   \end{beamercolorbox}
   \vskip0pt
-  \vspace*{2ex}
+  \vspace*{2.5ex}
 }
 
 % Example Block
@@ -239,6 +242,7 @@
   \vskip0pt
   \vspace*{2ex}
 }
+
 
 % Footer
 \newcommand{\footercontent}[1]{\newcommand{\insertfootercontent}{#1}}

@@ -1,3 +1,10 @@
 {"rule":"FR_SPELLING_RULE","sentence":"^\\Qstartstop = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, text width = 10cm, draw=black, fill=white]\\E$"}
 {"rule":"FR_SPELLING_RULE","sentence":"^\\Qprocess = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width = 6cm, draw=black, fill=white, text width = 10cm]\\E$"}
 {"rule":"FR_SPELLING_RULE","sentence":"^\\Qarrow = [ultra thick,->,>=stealth]\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\Q[shortinst]1 Aix Marseille Univ, Inserm, IRD, SESSTIM, ISSPAM, Marseille, France 2 Derpatamento de Estatística, Universidade Estudual de Maringá, Maringá, Paraná, Brazil 3 Aix Marseille Univ, APHM, Inserm, IRD, SESSTIM, ISSPAM, Hop Sainte Marguerite, BioSTIC, Marseille, France\\E$"}
+{"rule":"FLECHES","sentence":"^\\Qarrow = [ultra thick,->,>=stealth]\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Qarrow = [ultra thick,->,>=stealth]\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QL'électrocardiogramme (ECG) permet de mesurer l'activité électrique du cur et de diagnostiquer la FA, à condition de mesurer cette activité durant un épisode.\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QOn cherche notamment à observer les intervalles RR, ou la durée entre deux battements de cur consécutifs, sur le signal ECG.\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QL'irrégularité des battements du cur entraîne une perte d'efficacité du débit sanguin et une augmentation du risque de formations d'emboles.\\E$"}
+{"rule":"NOMBRES_EN_LETTRES_2","sentence":"^\\QDonnées 137 enregistrements ECG (>24h) issus de la base IRIDIA-AF \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q, incluant au moins 1 heure de rythme sinusal, ou rythme normal, avant le premier épisode de FA.\\E$"}
